@@ -51,7 +51,7 @@ On Windows:
 
     pip3 install -U pip
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-    git clone https://github.com/Airbus/scikit-decide.git
+    git clone --recurse-submodules -j8 https://github.com/Airbus/scikit-decide.git
     cd scikit-decide
     poetry install --no-root --extras all
     poetry build 
