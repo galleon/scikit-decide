@@ -270,7 +270,7 @@ class MyExampleCondSRCPSPDomain(SingleModeRCPSP_Stochastic_Durations_WithConditi
         return {1: [2,3], 2:[4], 3:[7], 4:[7], 5:[7], 6:[7], 7:[]}
 
     def _get_tasks_ids(self) -> Union[Set[int], Dict[int, Any], List[int]]:
-        return set([1,2,3,4,5,6,7])
+        return {1, 2, 3, 4, 5, 6, 7}
 
     def _get_tasks_mode(self) -> Dict[int, ModeConsumption]:
         return {
@@ -426,6 +426,7 @@ def run_astar():
     plot_ressource_view(do_sol.problem, do_sol)
     plot_resource_individual_gantt(do_sol.problem, do_sol)
     plt.show()
+
 
 def run_do():
     from skdecide.hub.solver.do_solver.do_solver_scheduling import DOSolver, \
