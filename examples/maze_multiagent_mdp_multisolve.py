@@ -251,6 +251,12 @@ class MultiAgentMaze(D):
             # returns a large cost
             return [(a, EnumSpace(AgentAction)) for a in self._memory.keys()]
         
+        def items(self) -> D.T_agent[D.T_concurrency[EnumSpace]]:
+            # Used by random walk that needs independent agent action spaces.
+            # It may lead to infeasible actions in which case _state_sample(...)
+            # returns a large cost
+            return [(a, EnumSpace(AgentAction)) for a in self._memory.keys()]
+        
         def sample(self) -> D.T_agent[D.T_concurrency[D.T_event]]:
             # Shuffle the agents (not in place, thus don't use rd.shuffle())
             agents_order = rd.sample(self._memory.keys(), k=len(self._memory.keys()))
