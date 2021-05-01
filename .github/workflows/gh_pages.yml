@@ -9,7 +9,6 @@ on:
 
 jobs:
   build-docs:
-    needs: deploy
     strategy:
       matrix:
         os: [ubuntu-latest]
