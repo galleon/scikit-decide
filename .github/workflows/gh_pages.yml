@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: generate 
         run: |
+          pip install scikit-decide
           (cd docs; python autodoc.py)
       - name: generate documentation
         run: yarn global add vuepress && yarn install && yarn docs:build && touch docs/.vuepress/dist/.nojekyll
