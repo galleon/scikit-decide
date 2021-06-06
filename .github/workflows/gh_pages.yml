@@ -20,7 +20,7 @@ jobs:
       - name: Download Unix artifact
         uses: actions/download-artifact@v1.0.0
         with:
-          name: wh_unix
+          name: wheels
       - name: Install scikit-decide 
         run: |
           ls -lrt
