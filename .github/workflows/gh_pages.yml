@@ -18,13 +18,17 @@ jobs:
         with:
           submodules: true
       - name: Download Unix artifact
-        uses: actions/download-artifact@v1.0.0
+        uses: dsaltares/fetch-gh-release-asset@master
         with:
-          name: wheels
+          repo: "dsaltares/godot-wild-jam-18"
+          version: "tags/daily"
+          file: "scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          target: "wheels/scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install scikit-decide 
         run: |
           ls -lrt
-          pip install scikit-decide
+          pip install wheels/scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'[all]'
       - name: Generate
         run: |
           (cd docs; python autodoc.py)
