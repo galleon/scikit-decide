@@ -1,8 +1,6 @@
 name: 🔨 Build scikit-decide doc
 
 on:
-  push:
-  pull_request:
   workflow_dispatch:
   schedule:
     - cron: '0 2 * * *'
@@ -17,9 +15,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - name: generate 
+        with:
+          submodules: true
+      - name: Download Unix artifact
+        uses: actions/download-artifact@v1.0.0
+        with:
+          name: wh_unix
+      - name: Install scikit-decide 
         run: |
+          ls -lrt
           pip install scikit-decide
+      - name: Generate
+        run: |
           (cd docs; python autodoc.py)
       - name: generate documentation
         run: yarn global add vuepress && yarn install && yarn docs:build && touch docs/.vuepress/dist/.nojekyll
