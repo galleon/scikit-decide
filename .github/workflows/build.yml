@@ -226,13 +226,11 @@ jobs:
         uses: actions/download-artifact@v1.0.0
         with:
           name: wheels
-      - name: Checks
-        run: |
-          ls -lRt
       - name: Upload artifacts 📦 to release
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: wheels
-          asset_name: wheels
+          file: wheels/*.whl
           tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
