@@ -226,7 +226,7 @@ jobs:
         uses: actions/download-artifact@v1.0.0
         with:
           name: wheels
-      -name: Checks
+      - name: Checks
         run: |
           ls -lRt
       - name: Upload artifacts 📦 to release
