@@ -36,6 +36,10 @@ jobs:
       - name: Install scikit-decide 
         run: |
           ls -lrt 
+          python -m pip install --upgrade pip
+          python --version 
+          python -c "import platform; print(platform.architecture())"
+          python3 -c "import distutils.util; print(distutils.util.get_platform().replace('.', '_').replace('-', '_'))"
           pip install scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'[all]'
       - name: Generate
         run: |
