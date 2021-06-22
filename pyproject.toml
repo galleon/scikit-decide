@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "scikit-decide"
-version = "0.9.1"
+version = "0.0.0"
 description = "The AI framework for Reinforcement Learning, Automated Planning and Scheduling"
 authors = [ "Airbus AI Research <scikit-decide@airbus.com>",]
 license = "MIT"
