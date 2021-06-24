@@ -81,7 +81,7 @@ jobs:
         if: matrix.os != 'ubuntu-latest'
         run: |
           echo $BOOST_ROOT
-          python -m pip install --upgrade -q pip
+          python -m pip install --upgrade pip
           pip install build poetry-dynamic-versioning
           python -m build --sdist --wheel
 
@@ -131,7 +131,7 @@ jobs:
       - name: Test with pytest
         run: |
           ls -lrt wheels/
-          pip install --find-links ./wheels/ scikit-decide[all] 
+          pip install ./wheels/scikit-decide\*.manylinux2014_x86_64.whl
           pytest -v -s tests/autocast
           pytest -v -s tests/solvers/cpp
           pytest -v -s tests/solvers/python
@@ -171,7 +171,7 @@ jobs:
       - name: Test with pytest
         run: |
           ls -lrt wheels/
-          pip install --find-links ./wheels/ scikit-decide[all] 
+          pip install ./wheels/scikit-decide\*-macosx_10_15_x86_64.whl
           pytest -v -s tests/autocast
           pytest -v -s tests/solvers/cpp
           pytest -v -s tests/solvers/python
@@ -209,7 +209,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pip install --find-links ./wheels/ scikit-decide[all] 
+          pip install ./wheels/scikit-decide\*-win_amd64.whl
           pytest -v -s tests/autocast
           pytest -v -s tests/solvers/cpp
           pytest -v -s tests/solvers/python
