@@ -39,9 +39,9 @@ enable = true
 vcs = "git"
 format-jinja = """
     {%- if distance == 0 -%}
-        {{ base }}+ {{ revision+1 }}
+        {{ base }}+{{ revision+1 }}
     {%- else -%}
-        {{ base }}-snapshot
+        {{ base }}-dev
     {%- endif -%}
 """
 
