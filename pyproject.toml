@@ -40,9 +40,9 @@ vcs = "git"
 bum = true
 format-jinja = """
     {%- if distance == 0 -%}
-        {{ base }}+{{ revision+1 }}
+        {{ base }}
     {%- else -%}
-        {{ base }}-dev
+        {{ bump_version(base) }}-dev
     {%- endif -%}
 """
 
