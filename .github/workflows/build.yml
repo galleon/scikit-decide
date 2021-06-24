@@ -88,8 +88,6 @@ jobs:
       - name: Build x86 Linux wheels
         if: matrix.wheel == 'x86_64'
         run: |
-          #docker run -e PLAT=manylinux2014_x86_64 -v `pwd`:/io quay.io/pypa/manylinux2014_x86_64 /io/scripts/build-manylinux-wheels.sh
-          docker --version
           DOCKER_BUILDKIT=1 docker build -t skdecide_x86_64 --output type=local,dest=tmpwheelhouse -f scripts/Dockerfile_x86_64 .
           mkdir -p dist
           mv tmpwheelhouse/wheelhouse/*.whl dist/
@@ -170,8 +168,9 @@ jobs:
 
       - name: Test with pytest
         run: |
+          env
           ls -lrt wheels/
-          pip install ./wheels/scikit-decide*-macosx_10_15_x86_64.whl
+          pip install ./wheels/scikit_decide-0.9.1.dev0-cp37-cp37m-macosx_10_15_x86_64.whl
           pytest -v -s tests/autocast
           pytest -v -s tests/solvers/cpp
           pytest -v -s tests/solvers/python
