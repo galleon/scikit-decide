@@ -128,7 +128,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pip install --no-index --find-links ./wheels/ "scikit-decide[all]"
+          pip install --pre --find-links ./wheels/ "scikit-decide[all]"
           pytest -v -s tests/autocast
           pytest -v -s tests/solvers/cpp
           pytest -v -s tests/solvers/python
@@ -168,7 +168,7 @@ jobs:
       - name: Test with pytest
         run: |
           env
-          pip install --no-index --find-links ./wheels/ "scikit-decide[all]"
+          pip install --pre --find-links ./wheels/ "scikit-decide[all]"
           pytest -v -s tests/autocast
           pytest -v -s tests/solvers/cpp
           pytest -v -s tests/solvers/python
@@ -206,7 +206,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pip install --no-index --find-links ./wheels/ "scikit-decide[all]"
+          pip install --pre --find-links ./wheels/ "scikit-decide[all]"
           pytest -v -s tests/autocast
           pytest -v -s tests/solvers/cpp
           pytest -v -s tests/solvers/python
