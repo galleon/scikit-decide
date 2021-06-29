@@ -26,16 +26,8 @@ jobs:
         with:
           repo: "galleon/scikit-decide"
           version: "tags/daily"
-          file: "scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-          target: "scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download Unix artifact
-        uses: dsaltares/fetch-gh-release-asset@master
-        with:
-          repo: "galleon/scikit-decide"
-          version: "tags/daily"
-          file: "scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-          target: "wheels/scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          file: "scikit_decide-0.9.2.dev0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+          target: "scikit_decide-0.9.2.dev0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install scikit-decide 
         run: |
@@ -44,7 +36,7 @@ jobs:
           python --version 
           python -c "import platform; print(platform.architecture())"
           python3 -c "import distutils.util; print(distutils.util.get_platform().replace('.', '_').replace('-', '_'))"
-          pip install scikit_decide-0.9.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl'[all]'
+          pip install --pre --find-links ./ "scikit-decide[all]"
       - name: Generate
         run: |
           (cd docs; python autodoc.py)
