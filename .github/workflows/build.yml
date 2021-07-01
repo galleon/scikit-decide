@@ -65,10 +65,19 @@ jobs:
           rm -rf boost_*/* download.tar.bz2 download.tar
         shell: bash
 
-      - name: Install build dependencies
-        run: |
-          curl --progress-bar --location --output skdecide-deps.zip https://github.com/${{ github.repository }}/releases/download/binary-deps/skdecide-deps-${{ runner.os }}.zip
-          7z x skdecide-deps.zip -y -bd
+      - name: Restore build dependencies
+        id: cache-build-dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            skdecide/hub/bin
+            skdecide/hub/share
+            skdecide/hub/*.msc
+          key: ${{ runner.os }}-build-${{ hashFiles('cpp/deps/chuffed', 'cpp/deps/gecode', 'cpp/deps/libminizinc') }}
+
+      - name: Update SKDECIDE_SKIP_DEPS
+        if: steps.cache-build-dependencies.outputs.cache-hit != 'true'
+        run: echo "SKDECIDE_SKIP_DEPS=0" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         if: matrix.os == 'ubuntu-latest'
@@ -93,6 +102,10 @@ jobs:
           DOCKER_BUILDKIT=1 docker build -t skdecide_x86_64 --build-arg PYTHON_VERSION=${{matrix.python-version}} --build-arg SKDECIDE_SKIP_DEPS=${{env.SKDECIDE_SKIP_DEPS}} --output type=local,dest=tmpwheelhouse -f scripts/Dockerfile_x86_64 .
           mkdir -p dist
           mv tmpwheelhouse/wheelhouse/*.whl dist/
+
+      - name: Update build cache from wheels
+        if: steps.cache-build-dependencies.outputs.cache-hit != 'true'
+        run: 7z x dist/*.whl -y
 
       - name: Upload as build artifacts
         uses: actions/upload-artifact@v2
