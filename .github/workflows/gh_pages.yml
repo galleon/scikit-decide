@@ -1,6 +1,7 @@
 name: 🔨 Build scikit-decide doc
 
 on:
+  push:
   workflow_dispatch:
   schedule:
     - cron: '0 2 * * *'
