@@ -33,9 +33,6 @@ jobs:
         run: |
           ls -lrt 
           python -m pip install --upgrade pip
-          python --version 
-          python -c "import platform; print(platform.architecture())"
-          python3 -c "import distutils.util; print(distutils.util.get_platform().replace('.', '_').replace('-', '_'))"
           pip install --pre --find-links ./ "scikit-decide[all]"
       - name: Generate
         run: |
