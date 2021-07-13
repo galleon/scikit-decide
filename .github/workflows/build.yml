@@ -246,6 +246,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: wheels/*.whl
           tag: daily
+          body: "This release was generated on $(date)"
           overwrite: true
           file_glob: true
   build-docs:
@@ -272,11 +273,7 @@ jobs:
           name: wheels
       - name: Install scikit-decide
         run: |
-          ls -lrt
           python -m pip install --upgrade pip
-          python --version
-          python -c "import platform; print(platform.architecture())"
-          python3 -c "import distutils.util; print(distutils.util.get_platform().replace('.', '_').replace('-', '_'))"
           pip install --pre --find-links ./ "scikit-decide[all]"
       - name: Generate
         run: |
